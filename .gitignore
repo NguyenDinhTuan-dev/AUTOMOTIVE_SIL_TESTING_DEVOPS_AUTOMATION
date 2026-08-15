@@ -1,0 +1,48 @@
+# Build outputs & executables
+*.exe
+*.o
+*.obj
+*.bin
+*.dll
+*.lib
+
+# Executable binaries inside build folder
+apps/vecu/build/*.exe
+apps/vecu/build/*.bin
+
+# 100% Ignore docs folder
+docs/
+
+# Explicitly track official technical report PDF at root
+!AUTOMOTIVE_SIL_TESTING_DEVOPS_AUTOMATION.pdf
+
+# Visual Studio & IDE cache
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code local state
+.vscode/*.log
+!.vscode/tasks.json
+!.vscode/settings.json
+
+# Simulink build cache & temp MAT files
+simulink/slprj/
+*.mat
+*.l
+
+# Temporary files & logs
+test-scripts/logs/*.log
+!test-scripts/logs/.gitkeep
+dtc_eeprom.bin
+*.rar
+*.zip
+
+# Temporary media storage & agent artifacts
+.tempmediaStorage/
+scratch/
+.agents/

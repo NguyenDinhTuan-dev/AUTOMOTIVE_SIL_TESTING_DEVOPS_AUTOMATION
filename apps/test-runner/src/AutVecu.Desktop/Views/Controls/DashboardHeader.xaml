@@ -1,0 +1,16 @@
+<UserControl x:Class="AutVecu.Desktop.Views.Controls.DashboardHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel LastChildFill="True">
+        <TextBlock DockPanel.Dock="Left"
+                   Text="AUT vECU Test Automation"
+                   FontSize="26"
+                   FontWeight="SemiBold"
+                   VerticalAlignment="Center" />
+        <TextBlock Text="{Binding CurrentStatus}"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Foreground="#334155"
+                   FontWeight="SemiBold" />
+    </DockPanel>
+</UserControl>

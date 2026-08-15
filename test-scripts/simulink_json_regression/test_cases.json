@@ -1,0 +1,107 @@
+[
+  {
+    "id": "SIM_READ_SPEED",
+    "name": "ReadSpeedFromSimulink",
+    "description": "Enter extended diagnostic session, require live Simulink updates, then read vehicle speed from vECU.",
+    "steps": [
+      {
+        "name": "Enter extended diagnostic session",
+        "request": "10 03",
+        "expectedPrefix": "50 03"
+      },
+      {
+        "name": "Require live Simulink update",
+        "command": "waitForChangingResponse",
+        "request": "22 01 FF",
+        "expectedPrefix": "62 01 FF",
+        "timeoutMs": 1500,
+        "pollIntervalMs": 250
+      },
+      {
+        "name": "Read vehicle speed",
+        "request": "22 01 00",
+        "expectedPrefix": "62 01 00",
+        "expectedNotEquals": "62 01 00 00 00"
+      }
+    ]
+  },
+  {
+    "id": "SIM_READ_RPM",
+    "name": "ReadRpmFromSimulink",
+    "description": "Enter extended diagnostic session, require live Simulink updates, then read engine RPM from vECU.",
+    "steps": [
+      {
+        "name": "Enter extended diagnostic session",
+        "request": "10 03",
+        "expectedPrefix": "50 03"
+      },
+      {
+        "name": "Require live Simulink update",
+        "command": "waitForChangingResponse",
+        "request": "22 01 FF",
+        "expectedPrefix": "62 01 FF",
+        "timeoutMs": 1500,
+        "pollIntervalMs": 250
+      },
+      {
+        "name": "Read engine RPM",
+        "request": "22 01 01",
+        "expectedPrefix": "62 01 01",
+        "expectedNotEquals": "62 01 01 03 20"
+      }
+    ]
+  },
+  {
+    "id": "SIM_READ_TEMP",
+    "name": "ReadCoolantTempFromSimulink",
+    "description": "Enter extended diagnostic session, require live Simulink updates, then read coolant temperature from vECU.",
+    "steps": [
+      {
+        "name": "Enter extended diagnostic session",
+        "request": "10 03",
+        "expectedPrefix": "50 03"
+      },
+      {
+        "name": "Require live Simulink update",
+        "command": "waitForChangingResponse",
+        "request": "22 01 FF",
+        "expectedPrefix": "62 01 FF",
+        "timeoutMs": 1500,
+        "pollIntervalMs": 250
+      },
+      {
+        "name": "Read coolant temperature",
+        "request": "22 01 02",
+        "expectedPrefix": "62 01 02"
+      }
+    ]
+  },
+  {
+    "id": "SIM_TEMP_RANGE",
+    "name": "CheckCoolantTempNormalRange",
+    "description": "Enter extended diagnostic session, require live Simulink updates, then verify coolant temperature is normal: 78 C to 99 C.",
+    "steps": [
+      {
+        "name": "Enter extended diagnostic session",
+        "request": "10 03",
+        "expectedPrefix": "50 03"
+      },
+      {
+        "name": "Require live Simulink update",
+        "command": "waitForChangingResponse",
+        "request": "22 01 FF",
+        "expectedPrefix": "62 01 FF",
+        "timeoutMs": 1500,
+        "pollIntervalMs": 250
+      },
+      {
+        "name": "Check coolant temperature range",
+        "request": "22 01 02",
+        "expectedPrefix": "62 01 02",
+        "expectedByteIndex": 3,
+        "expectedMin": 78,
+        "expectedMax": 99
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "host": "127.0.0.1",
+  "port": 13400,
+  "transport": "doip",
+  "doipSourceAddress": "0x0E00",
+  "doipTargetAddress": "0x0E80",
+  "mockMode": false,
+  "timeoutMs": 2000
+}

@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+
+    environment {
+        VECU_EXE_PATH = 'apps/vecu/build/vECU.exe'
+        LOG_DIR       = 'test-scripts/logs'
+    }
+
+    stages {
+        stage('1. Checkout') {
+            steps {
+                echo 'Checking out source repository...'
+                checkout scm
+            }
+        }
+
+        stage('2. Build vECU & C# Solution') {
+            steps {
+                echo 'Compiling C vECU Engine...'
+                bat 'gcc -Wall -Iapps/vecu/include apps/vecu/src/doip_server.c apps/vecu/src/memory.c apps/vecu/src/uds_driver.c apps/vecu/src/main.c -o apps/vecu/build/vECU.exe -lws2_32'
+                
+                echo 'Restoring and Building C# Test Runner Solution...'
+                bat 'dotnet build apps/test-runner/AUT_vECU.sln -c Release'
+            }
+        }
+
+        stage('3. Deploy vECU Core Process') {
+            steps {
+                echo 'Launching vECU background process on port 13400...'
+                bat 'ci/scripts/start_vecu.bat'
+                sleep 2
+            }
+        }
+
+        stage('4. Run Automated Regression Suite') {
+            steps {
+                echo 'Executing Tcl / JSON Diagnostic Test Suite (VTC_01 to VTC_05)...'
+                bat 'ci/scripts/run_tests.bat'
+            }
+        }
+
+        stage('5. Cleanup Environment') {
+            steps {
+                echo 'Terminating vECU process and releasing socket port 13400...'
+                bat 'ci/scripts/stop_vecu.bat'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Archiving test logs and build report artifacts...'
+            archiveArtifacts artifacts: 'test-scripts/logs/**', allowEmptyArchive: true
+        }
+        success {
+            echo 'CI/CD Automated Regression Pipeline: 100% PASSED!'
+        }
+        failure {
+            echo 'CI/CD Pipeline Failed. Check logs for details.'
+        }
+    }
+}

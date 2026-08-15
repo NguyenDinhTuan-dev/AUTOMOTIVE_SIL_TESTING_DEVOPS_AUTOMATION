@@ -1,0 +1,85 @@
+<UserControl x:Class="AutVecu.Desktop.Views.Controls.VecuServerPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Style="{StaticResource PanelBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="78" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource SectionTitle}"
+                       Foreground="#16A34A"
+                       Text="vECU Server" />
+
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Text="Host:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,8" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Margin="0,0,0,8"
+                     Text="{Binding VecuHost, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Port:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,8" />
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     Margin="0,0,0,8"
+                     Text="{Binding VecuPort, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       Text="Source:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,8" />
+            <TextBox Grid.Row="3"
+                     Grid.Column="1"
+                     Margin="0,0,0,8"
+                     Text="{Binding DoipSourceAddress, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Row="4"
+                       Grid.Column="0"
+                       Text="Target:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,14" />
+            <TextBox Grid.Row="4"
+                     Grid.Column="1"
+                     Margin="0,0,0,14"
+                     Text="{Binding DoipTargetAddress, UpdateSourceTrigger=PropertyChanged}" />
+
+            <StackPanel Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal">
+                <Button Content="Check"
+                        Style="{StaticResource GreenButton}"
+                        Command="{Binding CheckVecuConnectionCommand}" />
+                <Button Content="Clear"
+                        Style="{StaticResource RedButton}"
+                        Margin="10,0,18,0"
+                        Command="{Binding ClearVecuTargetCommand}" />
+                <TextBlock Text="Status:"
+                           VerticalAlignment="Center"
+                           Margin="0,0,8,0" />
+                <TextBlock Text="{Binding ServerStatus}"
+                           VerticalAlignment="Center"
+                           FontWeight="SemiBold"
+                           Foreground="#15803D" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
