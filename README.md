@@ -219,5 +219,4 @@ Press `Ctrl + Shift + B` to trigger the pre-configured VS Code build task (`.vsc
 
 ## 📄 License & Citation
 
-This independent collaborative research project is published under standard open engineering documentation guidelines.
-Refer to **[AUTOMOTIVE_SIL_TESTING_DEVOPS_AUTOMATION.pdf](AUTOMOTIVE_SIL_TESTING_DEVOPS_AUTOMATION.pdf)** for full academic and technical citation details.
+This collaborative independent research initiative adheres to open engineering documentation standards. Detailed technical and academic citation information can be found in **[AUTOMOTIVE_SIL_TESTING_DEVOPS_AUTOMATION.pdf](AUTOMOTIVE_SIL_TESTING_DEVOPS_AUTOMATION.pdf)**.
